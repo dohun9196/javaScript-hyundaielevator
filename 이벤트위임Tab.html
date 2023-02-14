@@ -42,8 +42,8 @@
             let tg = e.target;
             let idx = [...M.children].indexOf(tg);
             // !g && ([...M.children][0].classList.remove('on'), [...C.children][0].classList.remove('on'));
-            // g && g.classList.remove('on');
-            // g && t.classList.remove('on');
+            //  g && g.classList.remove('on');
+            //  g && t.classList.remove('on');
             g
                 ? (g.classList.remove('on'), t.classList.remove('on'))
                 : ([...M.children].forEach(it => it.classList.remove('on')),

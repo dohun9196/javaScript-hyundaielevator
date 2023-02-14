@@ -89,7 +89,165 @@ const MAIN_SLIDE_NAV_HANDLER = e => {
 }
 
 
-MAIN_SLIDE_NAV.addEventListener('click', MAIN_SLIDE_NAV_HANDLER)
+MAIN_SLIDE_NAV.addEventListener('click', MAIN_SLIDE_NAV_HANDLER);
+
+const PF_LEFT_SLIDE_OPTION = {
+    loop: true,
+    effect: 'fade',
+    fadeEffect: {
+        crossFade: true
+    },
+    initialSlide: 1,
+    navigation: {
+        nextEl: "#mainPortfolio .arrows li:nth-child(2)",
+        prevEl: "#mainPortfolio .arrows li:nth-child(1)",
+    },
+}
+const PF_LEFT_SLIDE = new Swiper('.pf_left_slide', PF_LEFT_SLIDE_OPTION);
+
+const PF_RIGHT_SLIDE_OPTION = {
+    loop: true,
+    slidesPerView: 5,
+    spaceBetween: 20,
+    touchRatio: 0.2,
+    initialSlide: 1,
+    slideToClickedSlide: true, // 클릭한 슬라이드로 이동
+    loopAdditionalSlides: 1, // 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정
+}
+const PF_RIGHT_SLIDE = new Swiper('.pf_right_slide', PF_RIGHT_SLIDE_OPTION);
+
+PF_LEFT_SLIDE.controller.control = PF_RIGHT_SLIDE;
+PF_RIGHT_SLIDE.controller.control = PF_LEFT_SLIDE;
+
+//https://shadesign.tistory.com/entry/swiper-slide-%EC%B4%9D%EC%A0%95%EB%A6%AC%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%A0%81%EC%9A%A9-%EC%98%B5%EC%85%98
+//https://www.biew.co.kr/entry/Swiper-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C-Swiper-2%EA%B0%9C-%EC%97%B0%EB%8F%99%EA%B3%BC-%EC%A0%9C%EC%96%B4Controller
+
+const MS_CONTENT = document.querySelectorAll('#mainSolution .Ms_content .content');
+const MS_NUM = document.querySelector('#mainSolution .num');
+
+const MS_SLIDE_OPTION = {
+    loop: true,
+    spaceBetween: 100,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    slideActiveClass: "on",
+    on: {
+        slideChangeTransitionStart: function () {
+            console.log(this, this.realIndex, this.slides.length);
+            let idx = this.realIndex;
+            let total = MS_CONTENT.length;
+            // for (let i = 0; i < MS_CONTENT.length; i++) {
+            //     MS_CONTENT[i].classList.remove('on');
+            // }
+
+            MS_NUM.innerHTML = `<strong>${idx < 10 ? '0' : ''}${idx + 1}</strong> / <span>${total < 10 ? '0' : ''}${total}</span>`;
+
+            MS_CONTENT.forEach(it => it.classList.remove('on'));
+            MS_CONTENT[idx].classList.add('on');
+        }
+    },
+
+    navigation: {
+        nextEl: "#mainSolution .arrows li:nth-child(2)",
+        prevEl: "#mainSolution .arrows li:nth-child(1)",
+    },
+
+    pagination: {
+        el: '#mainSolution .dots',
+        clickable: true,
+    },
+
+
+
+}
+const MS_SLIDE = new Swiper('.Ms_slide', MS_SLIDE_OPTION);
+
+//바닐라 자바스크립트로 youtube 쓰기...
+
+let player;
+const Y_OPTION = {
+    // height: '100%',
+    // width: '100%',
+    videoId: 'raw3Nu0_mBQ',
+}
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('main_movie01', Y_OPTION);
+}
+
+// pp.onclick = function () {
+//     console.log('btn')
+// }
+
+// const Y_PLAY_BTN = document.querySelector('#pp');
+// const Y_PAUSE_BTN = document.querySelector('#pp2');
+// const Y_PLAY_VIDEO = () => {
+//     console.log('btn');
+//     player.playVideo();
+// }
+// const Y_PAUSE_VIDEO = () => {
+//     console.log('btn');
+//     player.pauseVideo();
+// }
+// Y_PLAY_BTN.addEventListener('click', Y_PLAY_VIDEO);
+// Y_PAUSE_BTN.addEventListener('click', Y_PAUSE_VIDEO);
+
+
+const V_BTN = document.querySelector('.video_btn');
+
+let SW = true;
+const V_SWITCH = e => {
+    const tg = e.target;
+    tg.classList.toggle('on');
+    SW ? player.playVideo() : player.pauseVideo();
+    SW = !SW;
+}
+
+V_BTN.addEventListener('click', V_SWITCH);
+
+
+
+
+// let SW : 전역변수, 전역변수를 지역변수로 가둬서 쓰는 방법이 없을까??? 클로져...;
+
+// clouser 클로져로 함수 스코프에 변수 뮦어놓기01 (.. )
+// const VV = () => {
+//     let SW = true;
+//     const VV_inner = () => {
+//         console.log(SW);
+//         SW = !SW;
+//     }
+//     return VV_inner;
+// }
+//const DDD = VV();
+//ddd.addEventListener('click', DDD);
+//console.log(SW, SW2);
+
+
+
+// clouser 클로져로 함수 스코프에 변수 뮦어놓기02 (.. )
+// const TB = (function () {
+//     let SW = true;
+//     const toggle = e => {
+//         const target = e.target;
+//         target.classList.toggle('on');
+//         SW ? player.playVideo() : player.pauseVideo();
+//         SW = !SW;
+//     }
+//     return toggle;
+// })();
+
+
+// V_BTN.addEventListener('click', TB);
+
+
+// react 예시 (.. )
+// const [on, setOn] = useState(true);
+// <button onClick={()=> setOn(!on)} className={on ? 'on' : ''}></button>
+
+
+
+
 
 
 
