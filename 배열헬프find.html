@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        const a = 'name';
+        const list = [
+            { name: 'lee', age: 59 },
+            { name: 'kim', age: 39 },
+            { name: 'park', age: 19 },
+            { [a]: 'joe', age: 28 }
+        ]
+
+
+
+        const r = list.map((it, idx) => {
+            return Object.assign({}, it, { id: idx });
+            //return { ...it, id: idx + 1, name: it.age }
+        });
+        console.log(r);
+
+
+    </script>
+</body>
+
+</html>

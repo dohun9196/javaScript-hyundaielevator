@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<body>
+    <section id="ddd">
+        <div class="mm_slide">
+            <figure>
+                <div class="inner">
+                    <div class="left">
+                        <img src="./img/portfolio01.jpg" alt="">
+                    </div>
+                    <div class="txt">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, aut.</span>
+                    </div>
+                </div>
+            </figure>
+            <figure>
+                <div class="inner">
+                    <div class="left">
+                        <img src="./img/portfolio03.jpg" alt="">
+                    </div>
+                    <div class="txt">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, aut.</span>
+                    </div>
+                </div>
+            </figure>
+            <figure>
+                <div class="inner">
+                    <div class="left">
+                        <img src="./img/portfolio05.jpg" alt="">
+                    </div>
+                    <div class="txt">
+                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, aut.</span>
+                    </div>
+                </div>
+            </figure>
+        </div>
+    </section>
+    <style>
+        .inner {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        figure .left img {
+            transition: 0.5s;
+        }
+
+        figure.on .left img {
+            transform: scale(0.8);
+        }
+    </style>
+    <script>
+        var option = {
+            autoplay: true,
+            autoplaySpeed: 5000,
+            pauseOnHover: false,
+            pauseOnFocus: false,
+            dots: true,
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            speed: 400,
+        }
+        var msl = $('.mm_slide').slick(option);
+        var chevent = (e, s, c) => {
+            console.log($('.slick-current'));
+            var _this = $('.slick-current');
+            _this.addClass('on').siblings().removeClass('on');
+        }
+        msl.on('afterChange', chevent);
+    </script>
+</body>
+
+</html>

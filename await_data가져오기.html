@@ -18,7 +18,11 @@
         const writeMovie = (r) => {
             console.log(r);
             for (it of r) {
-                movie.innerHTML += `<li>${it.id}</li>`
+                movie.innerHTML += `<figure>
+                    <img src='${it.large_cover_image}'/>
+                    ${it.id}
+
+                    </figure>`
             }
         }
 
